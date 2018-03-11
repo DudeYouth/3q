@@ -1,0 +1,37 @@
+<view class="page-body">
+  <view class="kind-list-item">
+      <view class='list-item-info'>
+        <view class='list-item-info-bd'>
+          <navigator url="/page/detail/detail">
+            <text class="txtOrange">找老师：</text>五年级英语
+            <view class='pubTime'>01-15 18:30</view>
+          </navigator>
+        </view>
+        <view class='list-item-info-ft operate' bindtap="toast1Tap">标为过期</view>
+      </view>
+    </view>
+    <view class="kind-list-item">
+      <view class='list-item-info'>
+        <view class='list-item-info-bd'>
+          <navigator url="/page/detail/detail">
+            <text class="txtBlue">找学生：</text>五年级英语
+            <view class='pubTime'>01-15 18:30</view>
+          </navigator>
+          </view>
+        <view class='list-item-info-ft operate' bindtap="toast1Tap">标为过期</view>
+      </view>
+    </view>
+    <view class="kind-list-item">
+      <view class='list-item-info'>
+        <view class='list-item-info-bd'>
+          <navigator url="/page/detail/detail">
+          <navigator url="/page/detail/detail">
+            <text class="txtOrange">找老师：</text>五年级英语
+            <view class='pubTime'>01-15 18:30 已过期</view>
+          </navigator>
+          </navigator>
+          </view>
+        <view class='list-item-info-ft operate'><navigator url="/page/publish/publish">重新发布</navigator></view>
+      </view>
+    </view>
+</view>

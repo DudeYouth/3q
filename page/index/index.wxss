@@ -1,0 +1,98 @@
+@import "../common/lib/weui.wxss";
+.index-hd{
+  background: #fff;
+}
+.index-hd-inner {
+  display: flex;
+  font-size: 28rpx;
+  line-height: 40rpx;  
+  padding:10rpx 30rpx;
+}
+
+.index-hd-inner-bd{
+  flex:1;
+}
+.index-hd-inner-ft .icon-me{
+  margin-top:20rpx;
+}
+
+.txtGreen{
+  color:#1AAD19;
+  }
+
+.txtBlue{
+  color:#4183c4;
+  }
+
+.txtOrange{
+  color:#fc7700;
+  }
+
+.filter-tab{
+	display: flex;
+	width: 100%;
+	line-height: 80rpx;
+  border-top: 1rpx solid #ddd;
+	border-bottom: 1rpx solid #ddd;
+	position: relative;
+	z-index: 2;
+	background: #eee;
+}
+.filter-tab picker,.filter-tab picker-view {
+	flex: 1;
+	text-align: center;
+}
+.filter-tab view:after{
+	content: '';
+	display: inline-block;
+	vertical-align: 4rpx;
+	width: 0;
+	height: 0;
+	border-left: 12rpx solid transparent;
+	border-right: 12rpx solid transparent;
+	border-top: 12rpx solid #666;
+	margin-left: 8rpx;
+}
+.filter-tab view.active{
+	color: #3399FF;
+}
+.filter-tab:not(.sort-tab) view.active:after{
+	border-top: 0;
+	border-bottom: 12rpx solid #3399FF;
+}
+.filter-tab.sort-tab view.active:after{
+	border-top: 12rpx solid #3399FF;
+}
+.kind-list-item{
+  margin-bottom: 2rpx;
+}
+.kind-list-item navigator{
+    padding: 20rpx 30rpx;
+    background-color: #fff;
+}
+.list-item-info{
+  display: flex;
+  line-height: 60rpx;
+  font-size: 32rpx;
+}
+
+.list-item-info-bd{
+  flex:1;
+}
+.pubTime{
+    color: #999;
+    font-size: 28rpx;
+}
+.pubRegion{
+    color: #999;
+    font-size: 28rpx;
+}
+.price{
+  color: #666;
+}
+.hide{
+  display:none;
+  height:0;
+}
+
+

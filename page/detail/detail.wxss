@@ -1,0 +1,29 @@
+@import "../common/lib/weui.wxss";
+.weui-label{
+  width: 60px;
+}
+.tip-offs{
+  padding:0 15px 10px;
+  font-size: 28rpx;
+  display: flex;
+  color: #bbb;
+}
+.tip-offs-bd{
+  flex: 1;
+  color: #bbb;
+}
+.operate{
+    color: #1AAD19;
+    font-size: 28rpx;
+}
+.pubTime{
+    color: #999;
+    font-size: 28rpx;
+}
+.overTime{
+    color: #999;
+    font-size: 28rpx;
+}
+.txtGreen{
+  color:#1AAD19;
+  }

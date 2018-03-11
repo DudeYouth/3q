@@ -1,0 +1,38 @@
+@import "../../common/lib/weui.wxss";
+@import "../../common/index.wxss";
+.page-body{
+   padding-top: 20rpx;
+}
+.kind-list-item{
+  padding: 20rpx 30rpx;
+}
+.kind-list-item navigator{
+    background-color: #fff;
+}
+.list-item-info{
+  display: flex;
+  line-height: 60rpx;
+  font-size: 32rpx;
+}
+
+.list-item-info-bd{
+  flex:1;
+}
+.pubTime{
+    color: #999;
+    font-size: 28rpx;
+}
+.operate{
+    color: #999;
+    font-size: 28rpx;
+}
+.txtGreen{
+  color:#1AAD19;
+  }
+
+.txtBlue{
+  color:#4183c4;
+  }
+  .txtOrange{
+  color:#fc7700;
+  }
