@@ -28,6 +28,7 @@ function getArray(data) {
 function request(param){
   wx.request({
     url: 'https://api.3q91.com/v1/'+param.url,
+    header:param.header||{},
     data: param.data,
     method: param.type||'get',
     dataType: 'json',

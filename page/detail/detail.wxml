@@ -74,7 +74,7 @@
           <view class="weui-cell__bd">
             <input class="weui-input" type="text" disabled="{{true}}" value="ub****"></input>
           </view>
-          <view class="weui-cell__ft operate" bindtap="toast1Tap">
+          <view class="weui-cell__ft operate" bindtap="copyPhoneNumber">
             复制
           </view>
         </view>
@@ -85,7 +85,7 @@
           <view class="weui-cell__bd">
             <input class="weui-input" type="text" disabled="{{true}}" value="138****8888"></input>
           </view>
-          <view class="weui-cell__ft operate">
+          <view class="weui-cell__ft operate" bindtap='calling'>
             拨打
           </view>
         </view>

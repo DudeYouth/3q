@@ -1,6 +1,9 @@
 const openIdUrl = require('./config').openIdUrl
 import { request, objectToArray } from './util/util.js';
 App({
+  globalData:{
+
+  },
   onLaunch: function () {
     console.log('App Launch')
     //调用API从本地缓存中获取数据
@@ -25,7 +28,6 @@ App({
       //调用登录接口
       wx.login({
         success: function (result) {
-          console.log(result.code)
           request({
             url: 'security/login',
             type:'post',
@@ -33,12 +35,15 @@ App({
               code: result.code,
             },
             success: function(res) {
-              console.log(res)
+              var data = res.data.data;
+              that.globalData.access_token = data.access_token;
+              that.globalData.user_id = data.user_id;
             },
           })
           wx.getUserInfo({
             success: function (res) {
               that.globalData.userInfo = res.userInfo
+              console.log(res)
               typeof cb == "function" && cb(that.globalData.userInfo)
             }
           })

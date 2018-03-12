@@ -1,5 +1,7 @@
 import { request, objectToArray, getArray } from '../../util/util.js';
+var app = getApp();
 var data = wx.getStorageSync('all_data');
+console.log(data);
 Page({
   data: {
     focus: false,
@@ -43,6 +45,81 @@ Page({
       areaShow: false,
       areaHeight: 0,
     })
+  },
+  onLoad:function(){
+
+
+  },
+  getPhoneNumber: function (e) {
+    console.log(e.detail.errMsg)
+    console.log(e.detail.iv)
+    console.log(e.detail.encryptedData)
+    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '未授权',
+        success: function (res) { }
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        showCancel: false,
+        content: '同意授权',
+        success: function (res) { }
+      })
+    }
+  },
+  formBindsubmit:function(e){
+    var value = e.detail.value;
+    var province = data.district[this.data.areaSelect[0]];
+    var city = province.children[this.data.areaSelect[1]];
+    var area = {};
+    if (city.children&&city.children.length ){
+      area = city.children[this.data.areaSelect[2]];
+    }
+    console.log(app.globalData.access_token,123)
+    var param = {
+      address: value.address,
+      note: value.note,
+      wechat: value.wechat,
+      phone: value.phone,
+      show_contact: value.show_contact,
+      type: this.data.demandTypeIndex,
+      grade: this.data.gradeTypeIndex,
+      subject: this.data.SubjectTypeIndex,
+      salary: this.data.priceTypeIndex,
+      province_id: province.id ,
+      city_id:city.id,
+      district_id:area.id||0,
+    };
+    request({
+      url: 'demands',
+      type:'post',
+      header:{
+        Token: app.globalData.access_token
+      },
+      data:param,
+      success:function(res){
+        var message = '发布成功！';
+        var data = res.data;
+        var icon = 'success';
+        if (data.code==422 ){
+          icon = "none";
+          message = data.data[0].message;
+        }else{
+          setTimeout(function () {
+            wx.redirectTo({
+              url: '/page/index/index',
+            });
+          }, 1000);
+        }
+        wx.showToast({
+          title: message,
+          icon: icon,
+        });
+      }
+      });
   },
   demands: function () {
     request({
@@ -101,9 +178,4 @@ Page({
       areas: getArray(area),
     })
   },
-  toast1Tap: function () {
-    wx.showToast({
-      title: "发布成功"
-    })
-  }
 })
