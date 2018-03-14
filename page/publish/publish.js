@@ -1,30 +1,31 @@
 import { request, objectToArray, getArray } from '../../util/util.js';
 var app = getApp();
-var data = wx.getStorageSync('all_data');
-console.log(data);
+
 Page({
   data: {
     focus: false,
     index: 0,
-
+    data:{},
     demandTypeIndex: 0,
-    demandType: objectToArray(data.type),
+    demandType: [],
     
     SubjectTypeIndex: 0,
-    SubjectType: objectToArray(data.subject),
+    SubjectType: [],
 
     gradeTypeIndex: 0,
-    gradeType: objectToArray(data.grade),
-    priceType: objectToArray(data.salary),
+    gradeType: [],
+    priceType: [],
     priceTypeIndex: 0,
-    provinces: getArray(data.district),
-    citys: getArray(data.district[0].children),
-    areas: getArray(data.district[0].children[0].children),
+    provinces: [],
+    citys: [],
+    areas: [],
     province:'',
     city:'',
     area:'',
     areaSelect:[0,0,0],
     areaShow:false,
+    confirmShow:false,
+    phone:'',
   },
   areaChange: function () {
     var animation = wx.createAnimation({
@@ -46,15 +47,56 @@ Page({
       areaHeight: 0,
     })
   },
+  closeConfirmModel:function(){
+    this.setData({
+      confirmShow: false,
+    })
+  },
   onLoad:function(){
-
-
+    var that = this;
+    var data = wx.getStorageSync('all_data');
+    var infinite = {
+      id:0,
+      name:''
+    };
+    this.setData({
+      data:data,
+      demandType: data.type.unshift({}),
+      SubjectType: data.subject,
+      gradeType: data.grade,
+      priceType: data.salary,
+      provinces: getArray(data.district),
+      citys: getArray(data.district[0].children),
+      areas: getArray(data.district[0].children[0].children),
+    });
+    request({
+      url: 'users/' + app.globalData.user_id+'/phone',
+      header:{
+        Token: app.globalData.access_token,
+      },
+      success: function(res) {
+        var data = res.data;
+        if( data.code==0 ){
+          that.setData({
+            phone:data.data.phone,
+          });
+        }else{
+          that.setData({
+            confirmShow: true,
+          });    
+        }
+      },
+    })
+  },
+  copyPhoneNumber:function(){
+    this.setData({
+      wechat:this.data.phone,
+    })
   },
   getPhoneNumber: function (e) {
-    console.log(e.detail.errMsg)
-    console.log(e.detail.iv)
-    console.log(e.detail.encryptedData)
-    if (e.detail.errMsg == 'getPhoneNumber:fail user deny') {
+    var that = this;
+    console.log(e)
+    if (e.detail.errMsg) {
       wx.showModal({
         title: '提示',
         showCancel: false,
@@ -62,33 +104,31 @@ Page({
         success: function (res) { }
       })
     } else {
-      wx.showModal({
-        title: '提示',
-        showCancel: false,
-        content: '同意授权',
-        success: function (res) { }
-      })
+      that.setData({
+        phone: 12345678912,
+      });
     }
   },
   formBindsubmit:function(e){
     var value = e.detail.value;
+    var data = this.data.data;
     var province = data.district[this.data.areaSelect[0]];
     var city = province.children[this.data.areaSelect[1]];
     var area = {};
     if (city.children&&city.children.length ){
       area = city.children[this.data.areaSelect[2]];
     }
-    console.log(app.globalData.access_token,123)
+
     var param = {
       address: value.address,
       note: value.note,
       wechat: value.wechat,
       phone: value.phone,
       show_contact: value.show_contact,
-      type: this.data.demandTypeIndex,
-      grade: this.data.gradeTypeIndex,
-      subject: this.data.SubjectTypeIndex,
-      salary: this.data.priceTypeIndex,
+      type: this.data.demandType[this.data.demandTypeIndex].id,
+      grade: this.data.gradeType[this.data.gradeTypeIndex].id,
+      subject: this.data.SubjectType[this.data.SubjectTypeIndex].id,
+      salary: this.data.priceType[this.data.priceTypeIndex].id,
       province_id: province.id ,
       city_id:city.id,
       district_id:area.id||0,
@@ -121,24 +161,7 @@ Page({
       }
       });
   },
-  demands: function () {
-    request({
-      url: 'demands',
-      data: {
-        type: this.data.demandTypeIndex,
-        subject: this.data.SubjectTypeIndex,
-        grade: this.data.gradeTypeIndex,
-        province: this.data.areaSelect[0],
-        city: this.data.areaSelect[1],
-        district: this.data.areaSelect[2],
-      },
-      success: function () {
-
-      }
-    });
-  },
   confirm: function () {
-    this.demands();
     this.closeModal();
   },
   bindTextAreaBlur: function (e) {
@@ -166,7 +189,7 @@ Page({
   },
   bindPickerChange: function (e) {
     var selects = e.detail.value;
-    console.log(selects);
+    var data = this.data.data;
     var province = data.district[selects[0]];
     var provinceId = province.id;
     var city = province.children;
@@ -174,6 +197,7 @@ Page({
     var area = city[selects[1]].children;
     var areaId = (area[selects[2]] && area[selects[2]].id) || 0;
     this.setData({
+      areaSelect:selects,
       citys: getArray(city),
       areas: getArray(area),
     })

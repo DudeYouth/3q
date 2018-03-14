@@ -12,10 +12,13 @@
           <view class="navigator-text">我的发布</view>
           <view class="navigator-arrow"></view>
         </navigator>
-        <navigator url="/" class="navigator">
-          <view class="navigator-text">联系客服</view>
+        <view   class="navigator">
+          <view class="navigator-text" style="position:relative;">
+            <text>联系客服</text>
+            <button open-type="contact" class="opacityButton"></button>
+          </view>
           <view class="navigator-arrow"></view>
-        </navigator>
+        </view>
       </view>
     </view>
   </view>

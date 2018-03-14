@@ -11,62 +11,49 @@
       </view>
     </view>
   </view>
-      <view class="filter-tab">
-        <picker class="picker" bindchange="demandTypeChange" value="{{demandTypeIndex}}" range="{{demandType}}">
-          <view class="weui-input">{{demandType[demandTypeIndex]}}</view>
-        </picker>
-        <view class="weui-input" bindtap='areaChange'>地区</view>
-        <picker  bindchange="SubjectTypeChange" value="{{SubjectTypeIndex}}" range="{{SubjectType}}">
-          <view class="weui-input">{{SubjectType[SubjectTypeIndex]}}</view>
-        </picker>
-        <picker bindchange="gradeTypeChange" value="{{gradeTypeIndex}}" range="{{gradeType}}">
-          <view class="weui-input">{{gradeType[gradeTypeIndex]}}</view>
-        </picker>
-		</view>
-    <view bindtap='closeModal' class="{{areaShow?'':'hide'}} areaModal">
-      <view animation="{{animationData}}" catchtap="return false;" class="body" style="height:{{areaHeight}};">
-        <view class="header">
-          <text bindtap='closeModal'>取消</text>
-          <text bindtap='confirm' style="float:right;color:#1AAD19">确定</text>
-        </view>
-        <picker-view style="height: 200px;padding:0 30px;box-sizing:border-box"  bindchange="bindPickerChange" value="{{areaSelect}}">
-            <picker-view-column>
-              <view wx:for="{{provinces}}" style="line-height: 50px">{{item.name}}</view>
-            </picker-view-column>
-            <picker-view-column>
-              <view wx:for="{{citys}}" style="line-height: 50px">{{item.name}}</view>
-            </picker-view-column>
-            <picker-view-column>
-              <view wx:for="{{areas}}" style="line-height: 50px">{{item.name}}</view>
-            </picker-view-column>
-        </picker-view>
+  <view class="filter-tab">
+    <view class="weui-input" bindtap='areaChange' >{{city||'区域'}}</view>
+    <picker class="picker" bindchange="demandTypeChange" value="{{demandTypeIndex}}" range-key="name" range="{{demandType}}">
+      <view class="weui-input">{{demandType[demandTypeIndex].name}}</view>
+    </picker>
+    <picker bindchange="SubjectTypeChange"  value="{{SubjectTypeIndex}}" range-key="name" range="{{SubjectType}}">
+      <view class="weui-input">{{SubjectType[SubjectTypeIndex].name}}</view>
+    </picker>
+    <picker bindchange="gradeTypeChange" value="{{gradeTypeIndex}}" range-key="name" range="{{gradeType}}">
+      <view class="weui-input">{{gradeType[gradeTypeIndex].name}}</view>
+    </picker>
+  </view>
+  <view bindtap='closeModal' class="{{areaShow?'':'hide'}} areaModal">
+    <view animation="{{animationData}}" catchtap="return false;" class="body" style="height:{{areaHeight}};">
+      <view class="header">
+        <text bindtap='closeModal' style="font-size:16px;color:#888;">取消</text>
+        <text bindtap='confirm' style="float:right;color:#1AAD19;font-size:16px;">确定</text>
       </view>
+      <picker-view style="height: 200px;padding:0 30px;box-sizing:border-box" bindchange="bindPickerChange" value="{{areaSelect}}">
+        <picker-view-column>
+          <view wx:for="{{provinces}}" class="areaFont">{{item.name}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{citys}}" class="areaFont">{{item.name}}</view>
+        </picker-view-column>
+      </picker-view>
     </view>
+  </view>
   <view class="index-bd">
 
-    <view class="kind-list-item">
-      <navigator url="/page/detail/detail">
+    <view class="kind-list-item" wx:for="{{lists}}">
+      <navigator url="/page/detail/detail?id={{item.id}}">
         <view class='list-item-info'>
-          <view class='list-item-info-bd'><text class="txtOrange">找老师：</text>五年级英语</view>
-          <view class='list-item-info-ft pubRegion'>北京市 海淀区</view>
+          <view class='list-item-info-bd'>
+            <text class="txtOrange">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}</view>
+          <view class='list-item-info-ft pubRegion'>{{item.city}} {{item.district}}</view>
         </view>
         <view class='list-item-info'>
-          <view class='list-item-info-bd price'>80-100元/时</view>
-          <view class='list-item-info-ft pubTime'>01-16 18:30</view>
-        </view>
-      </navigator>
-    </view>
-    <view class="kind-list-item">
-      <navigator url="/page/detail/detail">
-        <view class='list-item-info'>
-          <view class='list-item-info-bd'><text class="txtBlue">找学生：</text>五年级英语</view>
-          <view class='list-item-info-ft pubRegion'>广州市 天河区</view>
-        </view>
-        <view class='list-item-info'>
-          <view class='list-item-info-bd price'>80-100元/时</view>
-          <view class='list-item-info-ft pubTime'>01-15 18:30</view>
+          <view class='list-item-info-bd price'>{{item.salaryText}}</view>
+          <view class='list-item-info-ft pubTime'>{{item.publishedTime}}</view>
         </view>
       </navigator>
     </view>
+
   </view>
 </view>

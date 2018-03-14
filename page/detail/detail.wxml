@@ -6,10 +6,10 @@
             <view class="weui-label">需求</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="找老师"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.typeText}}"></input>
           </view>
           <view class="weui-cell__ft pubTime">
-            01-16 18:30
+            {{info.publishedTime}}
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -17,10 +17,10 @@
             <view class="weui-label">编号</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="00000001"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.id}}"></input>
           </view>
           <view class="weui-cell__ft overTime">
-            已过期
+            {{info.isOverdue?'已过期':''}}
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -28,7 +28,7 @@
             <view class="weui-label">科目</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="一年级 语文"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.gradeText}} {{info.subjectText}}"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -36,7 +36,7 @@
             <view class="weui-label">课酬</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="60-100元/时"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.salaryText}}"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -44,7 +44,7 @@
             <view class="weui-label">区域</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="广东省 广州市 天河区"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.province}} {{info.city}} {{info.district}}"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -52,7 +52,7 @@
             <view class="weui-label">地址</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="天河路1号"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.address}}"></input>
           </view>
         </view>
         <view class="weui-cell weui-cell_textarea" style="align-items:flex-start;">
@@ -60,7 +60,7 @@
             <view class="weui-label more_demand_title">其他</view>
           </view>
           <view class="weui-cell__bd">
-            <view>开发小程序的第一步，你需要拥有一个小程序帐号，通过这个帐号你就可以管理你的小程序。</view>
+            <view>{{info.note}}</view>
           </view>
         </view>
       </view>
@@ -72,7 +72,7 @@
             <view class="weui-label">微信</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="ub****"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.wechat}}"></input>
           </view>
           <view class="weui-cell__ft operate" bindtap="copyPhoneNumber">
             复制
@@ -83,7 +83,7 @@
             <view class="weui-label">手机</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="138****8888"></input>
+            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.phone}}"></input>
           </view>
           <view class="weui-cell__ft operate" bindtap='calling'>
             拨打
@@ -91,7 +91,7 @@
         </view>
       </view>
     </view>
-    <view class="tip-offs">
-      如遇无效、虚假、诈骗信息，请<text class="txtGreen">立即举报</text> !
+    <view class="tip-offs" >
+      如遇无效、虚假、诈骗信息，请<view class="txtGreen" style="position:relative;">立即举报！<button open-type="contact" class="opacityButton">立即</button></view> 
     </view>
   </view>

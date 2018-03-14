@@ -7,13 +7,12 @@ Page({
   data: {
     provinces:[],
     citys:[],
-    areas:[],
     province:0,
     city:0,
-    area:0,
     index: 0,
+    lists:[],
     areaSelect:[0,0,0],
-    areaSelectId:[],
+    areaSelectId:[0,0,0],
     demandTypeIndex: 0,
     demandType: [],
     animationData:'',
@@ -47,18 +46,27 @@ Page({
     })
   },
   demands:function(){
+    var that = this;
+    var selects = this.data.areaSelect;
+    var province = this.data.district[selects[0]];
+    var provinceId = province.id;
+    var city = province.children;
+    var cityId = city[selects[1]].id;
     request({
       url: 'demands',
       data: {
-        type: this.data.demandTypeIndex,
-        subject: this.data.SubjectTypeIndex,
-        grade: this.data.gradeTypeIndex,
-        province: this.data.areaSelectId[0],
-        city: this.data.areaSelectId[1],
-        district: this.data.areaSelectId[2],
+        type: this.data.demandType[this.data.demandTypeIndex].id,
+        subject: this.data.SubjectType[this.data.SubjectTypeIndex].id,
+        grade: this.data.gradeType[this.data.gradeTypeIndex].id,
+        province: provinceId,
+        city: cityId,
       },
-      success: function () {
-
+      success: function (res) {
+        if( res.data.code==0 ){
+          that.setData({
+            lists:res.data.data.items
+          })
+        }
       }
     });
   },
@@ -69,21 +77,14 @@ Page({
   bindPickerChange: function (e) {
     var selects = e.detail.value;
     var province = this.data.district[selects[0]];
-    var provinceId = province.id;
     var provinceName = province.name;
     var city = province.children;
-    var cityId = city[selects[1]].id;
     var cityName = city[selects[1]].name;
-    var area = city[selects[1]].children;
-    var areaId = (area[selects[2]]&&area[selects[2]].id)||0;
-    var areaName = (area[selects[2]] && area[selects[2]].name) || '';
     this.setData({
       province: provinceName,
-      city: cityName,
-      area:areaName,
-      areaSelectId: [provinceId, cityId, areaId],
+      city: cityName.substring(0,3),
+      areaSelect: selects,
       citys: getArray(city),
-      areas: getArray(area),
     })
   },
   demandTypeChange: function (e) {
@@ -104,18 +105,17 @@ Page({
     var _this = this;
     var data = wx.getStorageSync('all_data');
     var district = data.district;
-    var city = district[_this.data.province].children;
-    var area = city[_this.data.city].children;
+    var city = district[_this.data.areaSelect[0]].children;
     console.log([].slice.call(data.type))
     _this.setData({
       district: district,
       provinces: getArray(district),
       citys: getArray(city),
-      areas: getArray(area),
-      demandType: objectToArray(data.type),
-      SubjectType: objectToArray(data.subject),
-      gradeType: objectToArray(data.grade)
+      demandType: data.type,
+      SubjectType: data.subject,
+      gradeType: data.grade
       })
+    this.demands();
   },
 
   gradeTypeChange: function (e) {

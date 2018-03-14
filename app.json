@@ -1,11 +1,12 @@
 {
   "pages": [
-    
+
+    "page/enter/enter",
     "page/index/index",
+    "page/me/my-published/my-published",
     "page/me/me",
-"page/publish/publish",
-    "page/detail/detail",
-    "page/me/my-published/my-published"
+    "page/publish/publish",
+    "page/detail/detail"
   ],
   "window": {
     "navigationBarTextStyle": "white",
