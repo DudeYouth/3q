@@ -1,6 +1,6 @@
 <view class="page-body">
-  <form bindsubmit="formBindsubmit" >
-  <view class="page-section">
+  <form bindsubmit="formBindsubmit">
+    <view class="page-section">
       <view class="weui-cells weui-cells_after-title">
         <view class="weui-cell weui-cell_input">
           <view class="weui-cell__hd">
@@ -8,7 +8,7 @@
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="demandTypeChange" value="{{demandTypeIndex}}" range-key='name' range="{{demandType}}">
-              <view class="weui-input">{{demandType[demandTypeIndex].name}}</view>
+              <view class="weui-input {{demandType[demandTypeIndex].id?'':'placeholderColor'}}">{{demandType[demandTypeIndex].name||'请选择需求'}}</view>
             </picker>
           </view>
         </view>
@@ -18,7 +18,7 @@
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="gradeTypeChange" value="{{gradeTypeIndex}}" range-key='name' range="{{gradeType}}">
-              <view class="weui-input">{{gradeType[gradeTypeIndex].name}}</view>
+              <view class="weui-input  {{gradeType[gradeTypeIndex].id?'':'placeholderColor'}}">{{gradeType[gradeTypeIndex].name||'请选择年级'}}</view>
             </picker>
           </view>
         </view>
@@ -28,7 +28,7 @@
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="SubjectTypeChange" value="{{SubjectTypeIndex}}" range-key='name' range="{{SubjectType}}">
-              <view class="weui-input">{{SubjectType[SubjectTypeIndex].name}}</view>
+              <view class="weui-input   {{SubjectType[SubjectTypeIndex].id?'':'placeholderColor'}}">{{SubjectType[SubjectTypeIndex].name||'请选择科目'}}</view>
             </picker>
           </view>
         </view>
@@ -38,7 +38,7 @@
           </view>
           <view class="weui-cell__bd">
             <picker bindchange="priceTypeChange" value="{{priceTypeIndex}}" range-key='name' range="{{priceType}}">
-              <view class="weui-input">{{priceType[priceTypeIndex].name}}</view>
+              <view class="weui-input    {{priceType[priceTypeIndex].id?'':'placeholderColor'}}">{{priceType[priceTypeIndex].name||'请选择课酬'}}</view>
             </picker>
           </view>
         </view>
@@ -47,7 +47,12 @@
             <view class="weui-label">区域</view>
           </view>
           <view class="weui-cell__bd">
-            <view class="weui-input">{{provinces[areaSelect[0]].name}}-{{citys[areaSelect[1]].name}}-{{areas[areaSelect[2]]&&areas[areaSelect[2]].name}}</view>
+            <view wx:if="{{provinces[areaSelect[0]].id}}">
+              <view class="weui-input">{{provinces[areaSelect[0]].name}}-{{citys[areaSelect[1]].name}}-{{areas[areaSelect[2]]&&areas[areaSelect[2]].name}}</view>
+            </view>
+            <view wx:else>
+              <view class="weui-input  {{provinces[areaSelect[0]].id?'':'placeholderColor'}}">请选择区域</view>
+            </view>
           </view>
         </view>
         <view class="weui-cell weui-cell_input">
@@ -63,66 +68,67 @@
             <view class="weui-label more_demand_title">其他</view>
           </view>
           <view class="weui-cell__bd more_demand_cnt">
-            <textarea name="note" placeholder="输入其他补充说明" auto-height="true" />
+            <textarea name="note" placeholder="{{placeholder}}" style="height:100px;" />
           </view>
         </view>
 
       </view>
 
-  </view>
-  <view class="page-section">
-    <view class="weui-cells weui-cells_after-title">
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">微信</view>
+    </view>
+    <view class="page-section">
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">微信</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="wechat" type="text" placeholder="输入你的微信号" value="{{wechat}}"></input>
+          </view>
+          <view class="weui-cell__ft operate" bindtap='copyPhoneNumber'>
+            复制手机号
+          </view>
         </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" name="wechat" type="text" placeholder="输入你的微信号" value="{{wechat}}"></input>
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__hd">
+            <view class="weui-label">手机</view>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="phone" type="text" disabled="{{true}}" placeholder="138****8888" value="{{phone}}"></input>
+          </view>
         </view>
-        <view class="weui-cell__ft operate" bindtap='copyPhoneNumber'>
-          复制手机号
+        <view class="weui-cell weui-cell_switch">
+          <view class="weui-cell__bd">通过3Q家教联系我</view>
+          <view class="weui-cell__ft">
+              <switch name="show_contact" bindchange="switchChange" value="1" checked="{{switchStatus}}" />
+          </view>
+
         </view>
       </view>
-      <view class="weui-cell weui-cell_input">
-        <view class="weui-cell__hd">
-          <view class="weui-label">手机</view>
-        </view>
-        <view class="weui-cell__bd">
-          <input class="weui-input" name="phone" type="text" disabled="{{true}}" placeholder="138****8888" value="{{phone}}"></input>
-        </view>
-      </view>
-      <view class="weui-cell weui-cell_switch">
-        <view class="weui-cell__bd">通过3Q家教联系我</view>
-        <view class="weui-cell__ft">
-          <switch name="show_contact" value="1" checked />
-        </view>
+      <view class="btn-area">
+        <button type="primary" formType="submit" bindtap="toast1Tap">发布</button>
       </view>
     </view>
-    <view class="btn-area">
-      <button type="primary" formType="submit" bindtap="toast1Tap">发布</button>
-    </view>
-  </view>
-    </form>
+  </form>
   <view bindtap='closeModal' class="{{areaShow?'':'hide'}} areaModal">
     <view animation="{{animationData}}" catchtap="return false;" class="body" style="height:{{areaHeight}};">
       <view class="header">
         <text bindtap='closeModal' style="font-size:16px;color:#888;">取消</text>
         <text bindtap='confirm' style="float:right;color:#1AAD19;font-size:16px;">确定</text>
       </view>
-      <picker-view style="height: 200px;padding:0 30px;box-sizing:border-box" bindchange="bindPickerChange" value="{{areaSelect}}">
+      <picker-view indicator-style="height: 50px;" style="height: 200px;padding:0 30px;box-sizing:border-box" bindchange="bindPickerChange" value="{{areaSelect}}">
         <picker-view-column>
-          <view wx:for="{{provinces}}" class="areaFont">{{item.name}}</view>
+          <view wx:for="{{provinces}}" wx:key="{{item.id}}" class="areaFont">{{item.name}}</view>
         </picker-view-column>
         <picker-view-column>
-          <view wx:for="{{citys}}" class="areaFont">{{item.name}}</view>
+          <view wx:for="{{citys}}" wx:key="{{item.id}}" class="areaFont">{{item.name}}</view>
         </picker-view-column>
         <picker-view-column>
-          <view wx:for="{{areas}}" class="areaFont">{{item.name}}</view>
+          <view wx:for="{{areas}}" wx:key="{{item.id}}" class="areaFont">{{item.name}}</view>
         </picker-view-column>
       </picker-view>
     </view>
   </view>
-  <view class="areaModal {{confirmShow?'':'hide'}} ">
+  <!-- <view class="areaModal {{confirmShow?'':'hide'}} ">
     <view class="confirmMoal">
       <view class="header">
         <text>操作提示</text>
@@ -133,5 +139,5 @@
           <button bindtap='closeConfirmModel' class="button" style="color:#1AAD19;" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">确认</button>
       </view>
     </view>
-  </view>
+  </view> -->
 </view>

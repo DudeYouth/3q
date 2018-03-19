@@ -1,9 +1,9 @@
-<view class="page-body">
-  <view class="kind-list-item" wx:for="{{lists}}">
+<view class="index"  style="height:{{winH}}px;"  scroll-top="{{scrollTop}}">
+  <view class="kind-list-item" wx:for="{{lists}}" wx:key="{{item.id}}">
     <view class='list-item-info'>
       <view class='list-item-info-bd'>
         <navigator url="/page/detail/detail?id={{item.id}}">
-          <text class="txtOrange">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}
+          <text class="{{item.type==2?'txtOrange':'txtBlue'}}">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}
           <view class='pubTime'>{{item.publishedTime}}</view>
         </navigator>
       </view>
@@ -16,5 +16,9 @@
         </view>
       </block>
     </view>
+
+  </view>
+      <view style="position:fixed;bottom:20px;right:20px;;z-index:99" bindtap='scrollTop'>
+    <image style="width:60px;height:60px" src="../../../image/green_tri.png"></image>
   </view>
 </view>

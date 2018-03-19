@@ -1,18 +1,23 @@
-<view class="index">
+<view class="index"  style="height:{{winH}}px;" scroll-top="{{scrollTop}}"  >
   <view class="index-hd">
-    <view class='index-hd-inner'>
-      <view class='index-hd-inner-bd'>
-        <button class="mini-btn" type="primary" size="mini" bindtap="navigateTo">我要发布</button>
+    <view class='index-hd-inner' >
+    <view style="flex:1">
+      <block   class='index-hd-inner-bd' wx:if="{{grant}}" >
+        <button class="mini-btn" type="primary" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >我要发布</button>
+      </block >
+      <block  wx:else>
+          <button class="mini-btn" type="primary" size="mini"   bindtap="navigateTo">我要发布</button>   
+      </block >
       </view>
-      <view class="index-hd-inner-ft">
+      <view class="index-hd-inner-ft" >
         <navigator url="/page/me/me">
-          <image class="icon-me" src="/image/icon_me2.png" style="width:30px; height:30px;"></image>
+          <image class="icon-me" src="/image/icon_me2.png"  style="width:30px; height:30px;"></image>
         </navigator>
       </view>
     </view>
   </view>
   <view class="filter-tab">
-    <view class="weui-input" bindtap='areaChange' >{{city||'区域'}}</view>
+    <view class="weui-input" style="padding:0px 15px" bindtap='areaChange' >{{city||'区域'}}</view>
     <picker class="picker" bindchange="demandTypeChange" value="{{demandTypeIndex}}" range-key="name" range="{{demandType}}">
       <view class="weui-input">{{demandType[demandTypeIndex].name}}</view>
     </picker>
@@ -29,23 +34,23 @@
         <text bindtap='closeModal' style="font-size:16px;color:#888;">取消</text>
         <text bindtap='confirm' style="float:right;color:#1AAD19;font-size:16px;">确定</text>
       </view>
-      <picker-view style="height: 200px;padding:0 30px;box-sizing:border-box" bindchange="bindPickerChange" value="{{areaSelect}}">
+      <picker-view indicator-style="height: 50px;" style="height: 200px;padding:0 30px;box-sizing:border-box" bindchange="bindPickerChange" value="{{areaSelect}}">
         <picker-view-column>
-          <view wx:for="{{provinces}}" class="areaFont">{{item.name}}</view>
+          <view wx:for="{{provinces}}" wx:key="{{item.id}}" class="areaFont">{{item.name}}</view>
         </picker-view-column>
         <picker-view-column>
-          <view wx:for="{{citys}}" class="areaFont">{{item.name}}</view>
+          <view wx:for="{{citys}}" wx:key="{{item.id}}"  class="areaFont">{{item.name}}</view>
         </picker-view-column>
       </picker-view>
     </view>
   </view>
   <view class="index-bd">
 
-    <view class="kind-list-item" wx:for="{{lists}}">
+    <view class="kind-list-item" wx:for="{{lists}}" wx:key="{{item.id}}" >
       <navigator url="/page/detail/detail?id={{item.id}}">
         <view class='list-item-info'>
           <view class='list-item-info-bd'>
-            <text class="txtOrange">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}</view>
+            <text class="{{item.type==2?'txtOrange':'txtBlue'}}">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}</view>
           <view class='list-item-info-ft pubRegion'>{{item.city}} {{item.district}}</view>
         </view>
         <view class='list-item-info'>
@@ -54,6 +59,17 @@
         </view>
       </navigator>
     </view>
-
+  </view>
+  <view style="position:fixed;bottom:20px;right:20px;z-index:99">
+    <image style="width:60px;height:60px" src="../../image/push.png"></image>
+    <view wx:if="{{grant}}">
+    <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0"  type="primary" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >我要发布</button>
+    </view>
+    <view wx:else>
+    <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0"  type="primary" size="mini"   bindtap="navigateTo">我要发布</button>
+    </view>  
+  </view>
+  <view style="position:fixed;bottom:80px;right:20px;;z-index:99" bindtap='scrollTop'>
+    <image style="width:60px;height:60px" src="../../image/green_tri.png"></image>
   </view>
 </view>

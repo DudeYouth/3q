@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "3Q家教"
+  "navigationBarTitleText": "3Q家教",
+  "enablePullDownRefresh": true
 }
