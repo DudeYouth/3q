@@ -15,6 +15,12 @@ function formatTime(time) {
     return n[1] ? n : '0' + n
   }).join(':')
 }
+function isEmptyObject(e) {
+  var t;
+  for (t in e)
+    return !1;
+  return !0
+}
 function getArray(data) {
   var arr = [];
   data && data.length && data.forEach(function (v) {
@@ -71,5 +77,6 @@ module.exports = {
   formatLocation: formatLocation,
   request:request,
   objectToArray: objectToArray,
-  getArray: getArray
+  getArray: getArray,
+  isEmptyObject: isEmptyObject,
 }

@@ -1,5 +1,5 @@
 const openIdUrl = require('./config').openIdUrl
-import { request, objectToArray } from './util/util.js';
+import { request, objectToArray, isEmptyObject } from './util/util.js';
 App({
   globalData: {
 
@@ -57,6 +57,40 @@ App({
 
     // }
   },
+  // 检测授权状态
+  checkSettingStatu: function (cb) {
+    var that = this;
+    // 判断是否是第一次授权，非第一次授权且授权失败则进行提醒
+    wx.getSetting({
+      success: function success(res) {
+        console.log(res.authSetting);
+        var authSetting = res.authSetting;
+        if (isEmptyObject(authSetting)) {
+          console.log('首次授权');
+        } else {
+          console.log('不是第一次授权', authSetting);
+          // 没有授权的提醒
+          if (authSetting['scope.userInfo'] === false) {
+            wx.showModal({
+              title: '用户未授权',
+              content: '如需正常使用阅读记录功能，请按确定并在授权管理中选中“用户信息”，然后点按确定。最后再重新进入小程序即可正常使用。',
+              showCancel: false,
+              success: function (res) {
+                if (res.confirm) {
+                  console.log('用户点击确定')
+                  wx.openSetting({
+                    success: function success(res) {
+                      console.log('openSetting success', res.authSetting);
+                    }
+                  });
+                }
+              }
+            })
+          }
+        }
+      }
+    });
+  },
   onLogin:function(){
     var that = this;
     wx.login({
@@ -68,9 +102,10 @@ App({
             code: result.code,
           },
           success: function (res) {
-            console.log(res, 9999);
+            console.log(res, result, 9999);
             var data = res.data.data;
             wx.setStorageSync('userinfo', data);
+            console
             that.globalData.access_token = data.access_token;
             that.globalData.user_id = data.user_id;
             wx.getUserInfo({
@@ -88,6 +123,7 @@ App({
     })
   },
   onShow: function () {
+    this.checkSettingStatu();
     console.log('App Show')
   },
   onHide: function () {
