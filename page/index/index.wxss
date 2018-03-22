@@ -2,6 +2,14 @@
 .index-hd{
   background: #fff;
 }
+.loadedMore{
+  width:100%;
+  height:40px;
+  line-height:40px;
+  text-align:center;
+  background-color:#fbfbfb;
+  color:#888;
+}
 .index-hd-inner {
   display: flex;
   font-size: 28rpx;

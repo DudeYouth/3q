@@ -7,6 +7,7 @@ Page({
     winH: 480,
     page: 1,
     perPage: 10,
+    loadedMore:false,
   },
   toast1Tap: function () {
     wx.showToast({
@@ -67,12 +68,19 @@ Page({
       success: function (res) {
         console.log(res)
         if (res.data.code == 0) {
-          res.data.data.items.forEach(function (value) {
-            that.data.lists.push(value);
-          });
-          that.setData({
-            lists: that.data.lists
-          })
+          if (!res.data.data.items || !res.data.data.items.length) {
+            that.setData({
+              loadedMore: true,
+            })
+          } else {
+            res.data.data.items.forEach(function (value) {
+              that.data.lists.push(value);
+            });
+            that.setData({
+              lists: that.data.lists,
+              loadedMore: false,
+            })
+          }
         }
       },
     })

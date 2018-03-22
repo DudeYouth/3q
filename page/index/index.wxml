@@ -51,7 +51,7 @@
         <view class='list-item-info'>
           <view class='list-item-info-bd'>
             <text class="{{item.type==2?'txtOrange':'txtBlue'}}">{{item.typeText}}：</text>{{item.gradeText}}{{item.subjectText}}</view>
-          <view class='list-item-info-ft pubRegion'>{{item.city}} {{item.district}}</view>
+          <view class='list-item-info-ft pubRegion'> {{item.city}} {{item.district}}</view>
         </view>
         <view class='list-item-info'>
           <view class='list-item-info-bd price'>{{item.salaryText}}</view>
@@ -59,8 +59,11 @@
         </view>
       </navigator>
     </view>
+    <block wx:if="{{loadedMore}}">
+      <view class="loadedMore">没有更多数据了</view>
+    </block>
   </view>
-  <view style="position:fixed;bottom:20px;right:20px;z-index:99">
+  <!-- <view style="position:fixed;bottom:20px;right:20px;z-index:99">
     <image style="width:60px;height:60px" src="../../image/push.png"></image>
     <view wx:if="{{grant}}">
     <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0"  type="primary" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" >我要发布</button>
@@ -68,8 +71,8 @@
     <view wx:else>
     <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0"  type="primary" size="mini"   bindtap="navigateTo">我要发布</button>
     </view>  
-  </view>
-  <view style="position:fixed;bottom:80px;right:20px;;z-index:99" bindtap='scrollTop'>
-    <image style="width:60px;height:60px" src="../../image/green_tri.png"></image>
+  </view> -->
+  <view style="position:fixed;bottom:20px;right:20px;;z-index:99" bindtap='scrollTop'>
+    <image style="width:60px;height:60px" src="../../image/icon_totop.png"></image>
   </view>
 </view>

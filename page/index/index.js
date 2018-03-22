@@ -27,6 +27,7 @@ Page({
     areaHeight: 0,
     grant: false,
     page: 1,
+    loadedMore:true,
     perPage: 10,
   },
   onPullDownRefresh: function () {
@@ -143,19 +144,26 @@ Page({
       data: param,
       success: function (res) {
         if (res.data.code == 0) {
-          if (!flag) {
-            res.data.data.items.forEach(function (value) {
-              that.data.lists.push(value);
-            });
+          if (!res.data.data.items || !res.data.data.items.length ){
             that.setData({
-              lists: that.data.lists
+              loadedMore: true,
             })
-          } else {
-            that.setData({
-              lists: res.data.data.items
-            })
+          }else{
+            if (!flag) {
+              res.data.data.items.forEach(function (value) {
+                that.data.lists.push(value);
+              });
+              that.setData({
+                lists: that.data.lists,
+                loadedMore: true,
+              })
+            } else {
+              that.setData({
+                lists: res.data.data.items,
+                loadedMore: true,
+              })
+            }
           }
-
         }
       }
     });

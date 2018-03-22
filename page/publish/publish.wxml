@@ -48,7 +48,7 @@
           </view>
           <view class="weui-cell__bd">
             <view wx:if="{{provinces[areaSelect[0]].id}}">
-              <view class="weui-input">{{provinces[areaSelect[0]].name}}-{{citys[areaSelect[1]].name}}-{{areas[areaSelect[2]]&&areas[areaSelect[2]].name}}</view>
+              <view class="weui-input">{{provinces[areaSelect[0]].name}} {{citys[areaSelect[1]].name}} {{areas[areaSelect[2]]&&areas[areaSelect[2]].name}}</view>
             </view>
             <view wx:else>
               <view class="weui-input  {{provinces[areaSelect[0]].id?'':'placeholderColor'}}">请选择区域</view>
@@ -82,7 +82,7 @@
             <view class="weui-label">微信</view>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" name="wechat" type="text" placeholder="输入你的微信号" value="{{wechat}}"></input>
+            <input class="weui-input" bindinput="wechatinput" name="wechat" type="text" placeholder="输入你的微信号" value="{{wechat}}"></input>
           </view>
           <view class="weui-cell__ft operate" bindtap='copyPhoneNumber'>
             复制手机号

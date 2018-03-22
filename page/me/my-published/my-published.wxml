@@ -1,4 +1,4 @@
-<view class="index"  style="height:{{winH}}px;"  scroll-top="{{scrollTop}}">
+<view class="index" style="height:{{winH}}px;" scroll-top="{{scrollTop}}">
   <view class="kind-list-item" wx:for="{{lists}}" wx:key="{{item.id}}">
     <view class='list-item-info'>
       <view class='list-item-info-bd'>
@@ -18,7 +18,10 @@
     </view>
 
   </view>
-      <view style="position:fixed;bottom:20px;right:20px;;z-index:99" bindtap='scrollTop'>
+      <block wx:if="{{loadedMore}}">
+      <view class="loadedMore">没有更多数据了</view>
+    </block>
+  <view style="position:fixed;bottom:20px;right:20px;;z-index:99" bindtap='scrollTop'>
     <image style="width:60px;height:60px" src="../../../image/green_tri.png"></image>
   </view>
 </view>

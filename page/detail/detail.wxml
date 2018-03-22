@@ -1,97 +1,125 @@
-  <view class="page-body">
-    <view class="page-section">
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">需求</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.typeText}}"></input>
-          </view>
-          <view class="weui-cell__ft pubTime">
-            {{info.publishedTime}}
-          </view>
+<view class="page-body">
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">需求</view>
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">编号</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.id}}"></input>
-          </view>
-          <view class="weui-cell__ft overTime">
-            {{info.isOverdue?'已过期':''}}
-          </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.typeText}}"></input>
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">科目</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.gradeText}} {{info.subjectText}}"></input>
-          </view>
+        <view class="weui-cell__ft pubTime">
+          {{info.publishedTime}}
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">课酬</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.salaryText}}"></input>
-          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">编号</view>
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">区域</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.province}} {{info.city}} {{info.district}}"></input>
-          </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.id}}"></input>
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">地址</view>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.address}}"></input>
-          </view>
+        <view class="weui-cell__ft overTime">
+          {{info.isOverdue?'已过期':''}}
         </view>
-        <view class="weui-cell weui-cell_textarea" style="align-items:flex-start;">
-          <view class="weui-cell__hd">
-            <view class="weui-label more_demand_title">其他</view>
-          </view>
-          <view class="weui-cell__bd">
-            <view>{{info.note}}</view>
-          </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">科目</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.gradeText}} {{info.subjectText}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">课酬</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.salaryText}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">区域</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.province}} {{info.city}} {{info.district}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">地址</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.address}}"></input>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell_textarea" style="align-items:flex-start;">
+        <view class="weui-cell__hd">
+          <view class="weui-label more_demand_title">其他</view>
+        </view>
+        <view class="weui-cell__bd">
+          <view>{{info.note}}</view>
         </view>
       </view>
     </view>
-    <view class="page-section">
-      <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">微信</view>
+  </view>
+  <view class="page-section">
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">微信</view>
+        </view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.wechat}}"></input>
+        </view>
+        <block wx:if="info.show_contact">
+          <view class="weui-cell__ft operate" >
+            我要联系
+            <button open-type="contact" class="opacityButton">进入客服会话</button>
           </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.wechat}}"></input>
-          </view>
+        </block>
+        <block wx:else>
           <view class="weui-cell__ft operate" bindtap="copyPhoneNumber">
             复制
           </view>
+        </block>
+      </view>
+      <view class="weui-cell weui-cell_input">
+        <view class="weui-cell__hd">
+          <view class="weui-label">手机</view>
         </view>
-        <view class="weui-cell weui-cell_input">
-          <view class="weui-cell__hd">
-            <view class="weui-label">手机</view>
+        <view class="weui-cell__bd">
+          <input class="weui-input" type="text" disabled="{{true}}" value="{{info.phone}}"></input>
+        </view>
+        <block wx:if="info.show_contact">
+          <view class="weui-cell__ft operate" >
+            我要联系
+            <button open-type="contact" class="opacityButton">进入客服会话</button>
           </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="text" disabled="{{true}}" value="{{info.phone}}"></input>
-          </view>
+        </block>
+        <block wx:else>
           <view class="weui-cell__ft operate" bindtap='calling'>
             拨打
           </view>
-        </view>
+        </block>
       </view>
     </view>
-    <view class="tip-offs" >
-      如遇无效、虚假、诈骗信息，请<view class="txtGreen" style="position:relative;">立即举报！<button open-type="contact" class="opacityButton">立即</button></view> 
+  </view>
+  <view class="tip-offs">
+    如遇无效、虚假、诈骗信息，请
+    <view class="txtGreen" style="position:relative;">立即举报！
+      <button open-type="contact" class="opacityButton">立即</button>
     </view>
   </view>
+  <view style="position:fixed;bottom:20px;right:20px;z-index:99">
+    <image style="width:60px;height:60px" src="../../image/push.png"></image>
+    <view wx:if="{{grant}}">
+      <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0" type="primary" size="mini" open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">我要发布</button>
+    </view>
+    <view wx:else>
+      <button class="btn" style="position:absolute;width:60px;height:60px;top:0;right:0;opacity:0" type="primary" size="mini" bindtap="navigateTo">我要发布</button>
+    </view>
+  </view>
+</view>

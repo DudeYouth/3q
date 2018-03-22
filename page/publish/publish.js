@@ -158,7 +158,7 @@ Page({
       note: value.note,
       wechat: value.wechat,
       phone: value.phone,
-      show_contact: value.show_contact,
+      show_contact: value.show_contact?1:0,
       type: demandType.id,
       grade: gradeType.id,
       subject: SubjectType.id,
@@ -194,6 +194,10 @@ Page({
         });
       }
       });
+  },
+  wechatinput:function(e){
+    var reg = /[^a-zA-Z0-9_-]*/g;
+    return e.detail.value.replace(reg,'');
   },
   confirm: function () {
     this.closeModal();
